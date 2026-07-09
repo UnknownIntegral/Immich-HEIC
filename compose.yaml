@@ -1,0 +1,11 @@
+services:
+  heic-to-jpg:
+    build: .
+    image: ghcr.io/unknownintegral/immich-heic:latest
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./state:/state
+    restart: unless-stopped

@@ -1,0 +1,9 @@
+.env
+.git
+.agents
+state
+tmp
+__pycache__
+*.pyc
+immich-openapi-specs.json
+

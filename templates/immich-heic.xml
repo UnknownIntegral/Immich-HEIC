@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Immich-HEIC</Name>
+  <Repository>ghcr.io/unknownintegral/immich-heic:latest</Repository>
+  <Registry>https://github.com/UnknownIntegral/Immich-HEIC/pkgs/container/immich-heic</Registry>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/UnknownIntegral/Immich-HEIC/issues</Support>
+  <Project>https://github.com/UnknownIntegral/Immich-HEIC</Project>
+  <Overview>Dashboard and nightly sidecar for safely converting Immich HEIC/HEIF assets to JPG through the public Immich API. Originals are not modified or deleted.</Overview>
+  <Category>MediaApp:Photos</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/UnknownIntegral/Immich-HEIC/main/templates/immich-heic.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/UnknownIntegral/Immich-HEIC/main/assets/icon.png</Icon>
+  <ExtraParams></ExtraParams>
+  <PostArgs></PostArgs>
+  <CPUset></CPUset>
+  <DateInstalled></DateInstalled>
+  <DonateText></DonateText>
+  <DonateLink></DonateLink>
+  <Requires></Requires>
+  <Config Name="Web UI Port" Target="8080" Default="8080" Mode="tcp" Description="Dashboard port." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="State Storage" Target="/state" Default="/mnt/user/appdata/immich-heic" Mode="rw" Description="Persistent state, recent run history, and idempotency tracking." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/immich-heic</Config>
+  <Config Name="Immich API URL" Target="IMMICH_API_URL" Default="http://immich:2283/api" Description="Immich API URL. Use a reachable URL from this container, such as http://immich:2283/api on a shared Docker network." Type="Variable" Display="always" Required="true" Mask="false">http://immich:2283/api</Config>
+  <Config Name="Immich API Key" Target="IMMICH_API_KEY" Default="" Description="Immich API key with asset read and asset upload permissions." Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Dry Run" Target="DRY_RUN" Default="true" Description="When true, scans and reports planned work without converting or uploading. Change to false after you trust the dry-run output." Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Daily Scan Enabled" Target="DAILY_SCAN_ENABLED" Default="true" Description="Run automatically once per day." Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+  <Config Name="Daily Scan Time" Target="DAILY_SCAN_TIME" Default="02:30" Description="Local 24-hour time for the automatic scan." Type="Variable" Display="always" Required="true" Mask="false">02:30</Config>
+  <Config Name="Run On Start" Target="RUN_ON_START" Default="false" Description="Run a scan when the container starts. Leave false for cautious unattended operation." Type="Variable" Display="advanced" Required="true" Mask="false">false</Config>
+  <Config Name="Timezone" Target="TZ" Default="America/Denver" Description="Container timezone used for the daily scan time." Type="Variable" Display="always" Required="true" Mask="false">America/Denver</Config>
+  <Config Name="JPEG Quality" Target="JPEG_QUALITY" Default="92" Description="JPEG quality from 1 to 100." Type="Variable" Display="advanced" Required="true" Mask="false">92</Config>
+  <Config Name="Preserve Metadata" Target="PRESERVE_METADATA" Default="true" Description="Copy EXIF/IPTC/XMP metadata from the source HEIC/HEIF into the uploaded JPG when possible." Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+  <Config Name="Remote Duplicate Check" Target="REMOTE_DUPLICATE_CHECK" Default="true" Description="Search Immich for the expected JPG filename before converting." Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+  <Config Name="Page Size" Target="PAGE_SIZE" Default="250" Description="Immich API search page size. Maximum is 1000." Type="Variable" Display="advanced" Required="true" Mask="false">250</Config>
+  <Config Name="Max Assets" Target="MAX_ASSETS" Default="0" Description="Maximum HEIC/HEIF assets to process per run. 0 means no limit. Useful for testing with 1 or 5." Type="Variable" Display="advanced" Required="true" Mask="false">0</Config>
+</Container>
+

@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+state/
+tmp/
+immich-openapi-specs.json
+
